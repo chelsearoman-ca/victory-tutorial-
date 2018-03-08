@@ -9,32 +9,36 @@ import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup} from 'victory';
 //         "name": "Punto Gelato",
 //         "totalSalesByDate":[
 //           {
-//             "date": 03092018,
+//             "date": '03092018',
 //             "totalSales": 34
 //           },{
-//             "date": 03082018,
+//             "date": '03082018',
 //             "totalSales": 78
 //           },{
-//             "date": 03072018,
+//             "date": '03072018',
 //             "totalSales": 132
 //           },{
-//             "date": 03062018,
+//             "date": '03062018',
 //             "totalSales": 32
 //           },{
-//             "date": 03052018,
+//             "date": '03052018',
 //             "totalSales": 98
 //           },{
-//             "date": 03042018,
+//             "date": '03042018',
 //             "totalSales": 63
 //           },{
-//             "date": 03032018,
+//             "date": '03032018',
 //             "totalSales": 56
 //           },{
-//             "date": 03022018,
+//             "date": '03022018',
 //             "totalSales": 134
 //           },
 //         ]
-//       },{
+//       }
+//     ]
+//   }
+// }
+      // ,{
 //         "name": "The Grow Op",
 //         "totalSalesByDate":[
 //           {
@@ -134,71 +138,52 @@ class Main extends React.Component {
         <VictoryChart
           // domainPadding will add space to each side of VictoryBar to
           // prevent it from overlapping the axis
-          height={1000} width={1000}
+          height={1000}
+          width={1000}
           domainPadding={{ x: 10, y: [1, 20] }}
           scale={{ x: "time" }}
           >
-            <VictotyGroup offset={20}
-                  colorScale={"qualitative"}>
-              <VictoryBar
-              data={[
-                {
-                  "date": '03092018',
-                  "totalSales": 132
-                },{
-                  "date": '03082018',
-                  "totalSales": 109
-                },{
-                  "date": '03072018',
-                  "totalSales": 232
-                },{
-                  "date": '03062018',
-                  "totalSales": 248
-                },{
-                  "date":'03052018',
-                  "totalSales": 89
-                },{
-                  "date":'03042018',
-                  "totalSales": 64
-                },{
-                  "date":'03032018',
-                  "totalSales": 134
-                },{
-                  "date": '03022018',
-                  "totalSales": 170
-                }
-              ]} x="date" y="totalSales"
-            />
-            {/* <VictoryBar
+            <VictoryGroup
+              offset={20}
+              colorScale={"qualitative"}>
+              {/* <VictoryAxis
+                  tickFormat={(x) => new Date(x).getFullYear()}
+                /> */}
+              {/* <VictoryBar
+              data={} x="date" y="totalSales"
+            /> */}
+
+            <VictoryBar
             data={[
               {
-                "date": '03092018',
+                "date": new Date(2018, 3, 9),
                 "totalSales": 132
               },{
-                "date": '03082018',
+                "date": new Date(2018, 3, 8),
                 "totalSales": 109
               },{
-                "date": '03072018',
+                "date": new Date(2018, 3, 7),
                 "totalSales": 232
               },{
-                "date": '03062018',
+                "date": new Date(2018, 3, 6),
                 "totalSales": 248
               },{
-                "date": '03052018',
+                "date": new Date(2018, 3, 5),
                 "totalSales": 89
               },{
-                "date": '03042018',
+                "date": new Date(2018, 3, 4),
                 "totalSales": 64
               },{
-                "date": '03032018',
+                "date": new Date(2018, 3, 3),
                 "totalSales": 134
               },{
-                "date": '03022018',
+                "date": new Date(2018, 3, 2),
                 "totalSales": 170
               },
-            ]} x="date" y="totalSales"
-          /> */}
-            </VictotyGroup>
+            ]}
+            x="date" y="totalSales"
+          />
+        </VictoryGroup>
         </VictoryChart>
       </div>
     );
