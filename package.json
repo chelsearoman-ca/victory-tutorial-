@@ -28,6 +28,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "prop-types": "^15.6.1",
     "victory": "^0.17.0"
   }
 }
