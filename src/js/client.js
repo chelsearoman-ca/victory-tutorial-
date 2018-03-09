@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup} from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryGroup, Bar} from 'victory';
 
 const data = {
   "data":{
@@ -127,71 +127,71 @@ const data = {
 }
 
 
-class Main extends React.Component {
-  render() {
 
-    const Punto = data.data.venues[0].totalSalesByDate
+
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      clicked: false,
+      style: {
+        data: { fill: "tomato" }
+      }
+    };
+  }
+
+  render() {
+	const Punto = data.data.venues[0].totalSalesByDate
     const GrowOp = data.data.venues[1].totalSalesByDate
     const Rialto = data.data.venues[2].totalSalesByDate
-    const barWidth = 40
-    console.log(Punto)
-    console.log(GrowOp)
+    const handleMouseOver = () => {
+      const fillColor = this.state.clicked ? "blue" : "tomato";
+      const clicked = !this.state.clicked;
+      this.setState({
+        clicked,
+        style: {
+          data: { fill: fillColor }
+        }
+      });
+    };
+
     return (
       <div>
-        <h1>Victory Tutorial</h1>
-        <VictoryChart
-          // domainPadding will add space to each side of VictoryBar to
-          // prevent it from overlapping the axis
-          // height={1000}
-          // width={1000}
-          domainPadding={{ x: 30}}
-          domain={{ y: [0, 500] }}
+        <VictoryChart height={400} width={400}
+          domainPadding={{ x: 50, y: [0, 20] }}
           scale={{ x: "time" }}
-          >
-            <VictoryGroup
-              offset={100}
-              colorScale={"qualitative"}
-              // style={{data: {width: barWidth, opacity: 1}}}
-            >
-               {/* {data.data.venues.map( venueData => {
-                console.log("hello venue", venueData.totalSalesByDate)
-                return(
-                 <VictoryBar
-                     data={Punto}
-                    x="date"
-                    y="totalSales"
-                  />
-                )})} */}
+        >
+        	<VictoryGroup offset={10} colorScale={"qualitative"}>
+        		<VictoryBar
 
-              <VictoryBar
-                data={GrowOp}
-                 x="date"
-                 y="totalSales"
+            data={Rialto}
+          x="date"
+          y="totalSales"
 
-               />
-               <VictoryBar
-                   data={Punto}
-                  x="date"
-                  y="totalSales"
-                />
+          />
 
+        		<VictoryBar
 
-              <VictoryBar
-              data={Rialto}
-              x="date"
-              y="totalSales"
-              />
-            </VictoryGroup>
-            {/* <VictoryAxis
-        dependentAxis
-        tickFormat={(x) => (`$${x}`)}
-      />
-      <VictoryAxis/> */}
+            data={Punto}
+          x="date"
+          y="totalSales"
+
+          />
+          <VictoryBar
+            dataComponent={
+              <Bar events={{ onMouseOver: handleMouseOver }}/>
+            }
+            style={this.state.style}
+            data={GrowOp}
+            x="date"
+            y="totalSales"
+          />
+
+        	</VictoryGroup>
         </VictoryChart>
       </div>
     );
   }
-}
-
+ }
 const app = document.getElementById('app');
-ReactDOM.render(<Main />, app);
+ReactDOM.render(<App/>, mountNode);
