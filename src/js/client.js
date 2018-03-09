@@ -39,7 +39,7 @@ const data = {
         "totalSalesByDate":[
           {
             "date": new Date(2018, 3, 9),
-            "totalSales": 163
+            "totalSales": 400
           },{
             "date": new Date(2018, 3, 8),
             "totalSales": 87
@@ -74,7 +74,7 @@ const data = {
             "totalSales": 89
           },{
             "date": new Date(2018, 3, 7),
-            "totalSales": 54
+            "totalSales": 400
           },{
             "date": new Date(2018, 3, 6),
             "totalSales": 78
@@ -126,39 +126,67 @@ const data = {
   }
 }
 
+
 class Main extends React.Component {
   render() {
-    console.log(data.data.venues[0].totalSalesByDate)
-    const newData = data.data.venues[0].totalSalesByDate
+
+    const Punto = data.data.venues[0].totalSalesByDate
+    const GrowOp = data.data.venues[1].totalSalesByDate
+    const Rialto = data.data.venues[2].totalSalesByDate
+    const barWidth = 40
+    console.log(Punto)
+    console.log(GrowOp)
     return (
       <div>
         <h1>Victory Tutorial</h1>
         <VictoryChart
           // domainPadding will add space to each side of VictoryBar to
           // prevent it from overlapping the axis
-          height={1000}
-          width={1000}
-          domainPadding={{ x: 10, y: [1, 20] }}
+          // height={1000}
+          // width={1000}
+          domainPadding={{ x: 30}}
+          domain={{ y: [0, 500] }}
           scale={{ x: "time" }}
           >
-            <VictoryGroup offset={20}
+            <VictoryGroup
+              offset={100}
               colorScale={"qualitative"}
+              // style={{data: {width: barWidth, opacity: 1}}}
             >
-              {data.data.venues.map( venueData => {
-                console.log("hello venue", venueData)
+               {/* {data.data.venues.map( venueData => {
+                console.log("hello venue", venueData.totalSalesByDate)
                 return(
                  <VictoryBar
-                     data={venueData.totalSalesByDate}
+                     data={Punto}
                     x="date"
                     y="totalSales"
                   />
-                )
-              })}
+                )})} */}
+
+              <VictoryBar
+                data={GrowOp}
+                 x="date"
+                 y="totalSales"
+
+               />
+               <VictoryBar
+                   data={Punto}
+                  x="date"
+                  y="totalSales"
+                />
 
 
-
+              <VictoryBar
+              data={Rialto}
+              x="date"
+              y="totalSales"
+              />
             </VictoryGroup>
-
+            {/* <VictoryAxis
+        dependentAxis
+        tickFormat={(x) => (`$${x}`)}
+      />
+      <VictoryAxis/> */}
         </VictoryChart>
       </div>
     );
